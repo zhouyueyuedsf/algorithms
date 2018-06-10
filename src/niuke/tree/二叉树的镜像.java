@@ -1,6 +1,6 @@
-package tree;
+package niuke.tree;
 
-import tree.子树.TreeNode;
+import common.TreeNode;
 
 /**
  * 求一个树的二叉树的镜像

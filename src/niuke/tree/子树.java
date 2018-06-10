@@ -1,4 +1,4 @@
-package tree;
+package niuke.tree;
 
 public class ×ÓÊ÷ {
 	public class TreeNode {
