@@ -8,7 +8,6 @@ public class 调整数组顺序使奇数位于偶数前面 {
         listArray.size();
         if(array.length > 0) listArray.add(array[0]);
         for(int i = 1; i < array.length; i++){
-            //����������������С��������ż��. ������մ�С�����˳��������С��ż��
             int a = array[i];
             int index = i;
             boolean bool = false;

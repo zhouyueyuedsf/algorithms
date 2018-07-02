@@ -3,11 +3,11 @@ package niuke.tree;
 import common.TreeNode;
 
 /**
- * 求一个树的二叉树的镜像
+ * 浜屽弶鏍戠殑闀滃儚
  * @author zhouyueyue1
  *
  */
-public class 二叉树的镜像 {
+public class 浜屽弶鏍戠殑闀滃儚 {
 	public void Mirror(TreeNode root) {
         if(root == null) return;
         Mirror(root.left);

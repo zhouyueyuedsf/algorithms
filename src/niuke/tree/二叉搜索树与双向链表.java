@@ -30,7 +30,7 @@ public class 二叉搜索树与双向链表 {
 	}
 
 	public static void main(String[] args) {
-		TreeNode node = TreeMainClass.stringToTreeNode("");
+		TreeNode node = TreeMainClass.stringToTreeNode("[1,2,3]");
 		二叉搜索树与双向链表 run = new 二叉搜索树与双向链表();
 		TreeNode tn = run.Convert(node);
 		
