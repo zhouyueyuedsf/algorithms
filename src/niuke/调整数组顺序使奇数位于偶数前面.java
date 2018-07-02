@@ -2,13 +2,13 @@ package niuke;
 
 import java.util.*;
 
-public class µ÷ÕûÊı×éË³ĞòÊ¹ÆæÊıÎ»ÓÚÅ¼ÊıÇ°Ãæ {
+public class è°ƒæ•´æ•°ç»„é¡ºåºä½¿å¥‡æ•°ä½äºå¶æ•°å‰é¢ {
 	public static void reOrderArray(int [] array) {
         LinkedList<Integer> listArray = new LinkedList<Integer>();
         listArray.size();
         if(array.length > 0) listArray.add(array[0]);
         for(int i = 1; i < array.length; i++){
-            //Á½¸öÌõ¼ş£¬Ë÷Òı´óĞ¡£¬ÆæÊıºÍÅ¼Êı. Èç¹û°´ÕÕ´ÓĞ¡µ½´óµÄË³Ğò£¬ÔòÆæÊıĞ¡ÓÚÅ¼Êı
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¼ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ´ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½Å¼ï¿½ï¿½
             int a = array[i];
             int index = i;
             boolean bool = false;
@@ -31,7 +31,7 @@ public class µ÷ÕûÊı×éË³ĞòÊ¹ÆæÊıÎ»ÓÚÅ¼ÊıÇ°Ãæ {
 	
 	public static void main(String[] args) {
 		int array[] = {};
-		µ÷ÕûÊı×éË³ĞòÊ¹ÆæÊıÎ»ÓÚÅ¼ÊıÇ°Ãæ.reOrderArray(array);
+		è°ƒæ•´æ•°ç»„é¡ºåºä½¿å¥‡æ•°ä½äºå¶æ•°å‰é¢.reOrderArray(array);
 		System.out.println(array);
 		
 		Integer[] ins = {};

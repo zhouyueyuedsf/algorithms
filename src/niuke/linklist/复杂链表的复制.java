@@ -3,12 +3,12 @@ package niuke.linklist;
 import common.RandomListNode;
 
 /**
- * ºÜ¾­µäµÄÌâÄ¿Ñ½
+ * ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Ñ½
  * 
  * @author zhouyueyue1
  *
  */
-public class ¸´ÔÓÁ´±íµÄ¸´ÖÆ {
+public class å¤æ‚é“¾è¡¨çš„å¤åˆ¶ {
 
 	public RandomListNode copyRandomList(RandomListNode pHead) {
 		if (pHead == null)
@@ -42,12 +42,12 @@ public class ¸´ÔÓÁ´±íµÄ¸´ÖÆ {
 	}
 
 	/**
-	 * ¸Ã·½°¸ ÔÚÅ£¿ÍÉÏÍ¨²»¹ı ²¢Î´ÕÒµ½Ô­Òò
+	 * ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î´ï¿½Òµï¿½Ô­ï¿½ï¿½
 	 * @param pHead
 	 * @return
 	 */
 	public RandomListNode Clone(RandomListNode pHead) {
-		// first step: ¸´ÖÆ½Úµã£¬²¢²åÈëÖ÷Á´±í
+		// first step: ï¿½ï¿½ï¿½Æ½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		RandomListNode curNode = pHead;
 		while (curNode != null) {
 			RandomListNode newNode = new RandomListNode(curNode.label);
@@ -56,12 +56,12 @@ public class ¸´ÔÓÁ´±íµÄ¸´ÖÆ {
 			curNode = newNode.next;
 		}
 		curNode = pHead;
-		// second: ¸´ÖÆrandomµÄ²¿·Ö
+		// second: ï¿½ï¿½ï¿½ï¿½randomï¿½Ä²ï¿½ï¿½ï¿½
 		while (curNode != null && curNode.next != null && curNode.random != null) {
 			curNode.next.random = curNode.random.next;
 			curNode = curNode.next.next;
 		}
-		// third: ·Ö¿ªÁ´±í
+		// third: ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		curNode = pHead;
 		int count = 0;
 
@@ -96,7 +96,7 @@ public class ¸´ÔÓÁ´±íµÄ¸´ÖÆ {
 		// node4.next = node5;
 		// node4.random = node3;
 		// node5.next = node6;
-		¸´ÔÓÁ´±íµÄ¸´ÖÆ run = new ¸´ÔÓÁ´±íµÄ¸´ÖÆ();
+		å¤æ‚é“¾è¡¨çš„å¤åˆ¶ run = new å¤æ‚é“¾è¡¨çš„å¤åˆ¶();
 		run.Clone(node1);
 		run.copyRandomList(node1);
 	}

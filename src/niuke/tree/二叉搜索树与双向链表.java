@@ -1,10 +1,9 @@
 package niuke.tree;
 
-import common.Solution;
 import common.TreeMainClass;
 import common.TreeNode;
 
-public class 二叉搜索树与双向链表 {
+public class 浜屽弶鎼滅储鏍戜笌鍙屽悜閾捐〃 {
 
 	TreeNode lastNode = null;
 	public TreeNode Convert(TreeNode pRootOfTree) {
@@ -32,7 +31,7 @@ public class 二叉搜索树与双向链表 {
 
 	public static void main(String[] args) {
 		TreeNode node = TreeMainClass.stringToTreeNode("");
-		二叉搜索树与双向链表 run = new 二叉搜索树与双向链表();
+		浜屽弶鎼滅储鏍戜笌鍙屽悜閾捐〃 run = new 浜屽弶鎼滅储鏍戜笌鍙屽悜閾捐〃();
 		TreeNode tn = run.Convert(node);
 		
 	}

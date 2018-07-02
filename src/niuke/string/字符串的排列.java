@@ -1,15 +1,14 @@
 package niuke.string;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * 有点东西
+ * 锟叫点东锟斤拷
  * @author zhouyueyue1
  *
  */
-public class 字符串的排列 {
+public class 瀛楃涓茬殑鎺掑垪 {
 	ArrayList<String> resList = new ArrayList<>();
 
 	public void swap(char[] charArray, int i, int j) {
@@ -45,7 +44,7 @@ public class 字符串的排列 {
 	}
 
 	public static void main(String[] args) {
-		字符串的排列 run = new 字符串的排列();
+		瀛楃涓茬殑鎺掑垪 run = new 瀛楃涓茬殑鎺掑垪();
 //		char[] charArray = {'c', 'b', 'a'};
 //		Arrays.sort(charArray, 1, 3);
 		System.out.println(run.Permutation("abc").toString());

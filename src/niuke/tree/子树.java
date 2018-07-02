@@ -1,6 +1,6 @@
 package niuke.tree;
 
-public class ×ÓÊ÷ {
+public class å­æ ‘ {
 	public class TreeNode {
 	    int val = 0;
 	    TreeNode left = null;

@@ -2,8 +2,7 @@ package niuke;
 
 import java.util.ArrayList;
 
-public class Ë³Ê±Õë´òÓ¡¾ØÕó {
-	//ÆäÊµÕâµÀÌâ°´È¦´òÓ¡¾Í¿ÉÒÔÁË£¬×¢Òâ¿ØÖÆ±ß½ç
+public class é¡ºæ—¶é’ˆæ‰“å°çŸ©é˜µ {
 	public ArrayList<Integer> printMatrix(int [][] matrix) {
 	       ArrayList<Integer> intList = new ArrayList<Integer>();
 	        int level = 0;
@@ -27,12 +26,12 @@ public class Ë³Ê±Õë´òÓ¡¾ØÕó {
 	 	           }
 	 	           int orginLevel = level;
 	 	           if(i > max_bottom || i < max_top || j > max_right || j < max_left ){
-	 	               level = (level + 1) % 4;//ÓÅÏÈ¼¶±ä»¯,¿ªÊ¼×î¸ßÎªÓÒ£¬ÏÂ£¬×ó£¬ÉÏ
+	 	               level = (level + 1) % 4;//ï¿½ï¿½ï¿½È¼ï¿½ï¿½ä»¯,ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Îªï¿½Ò£ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½
 	 	           }
 	 	           if(orginLevel == level) {
 	 	        	   intList.add(matrix[i][j]);
 	 	           }
-	 	           //ÓÒ
+	 	           //ï¿½ï¿½
 	 	           if(level == 0){
 	 	               j++;
 	 	               if(orginLevel != level){
@@ -65,7 +64,7 @@ public class Ë³Ê±Õë´òÓ¡¾ØÕó {
 	    }
 	
 	public static void main(String[] args) {
-		Ë³Ê±Õë´òÓ¡¾ØÕó t = new Ë³Ê±Õë´òÓ¡¾ØÕó();
+		é¡ºæ—¶é’ˆæ‰“å°çŸ©é˜µ t = new é¡ºæ—¶é’ˆæ‰“å°çŸ©é˜µ();
 		int[][] matrix = {{1,2,3,4},{5,6,7,8},{10,11,12,13},{14,15,16,17}};
 		System.out.println(t.printMatrix(matrix));
 	}

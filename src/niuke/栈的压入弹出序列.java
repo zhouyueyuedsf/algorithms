@@ -1,11 +1,9 @@
 package niuke;
 
 import java.util.ArrayList;
-import java.util.Stack;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class 栈的压入弹出序列 {
+public class 鏍堢殑鍘嬪叆寮瑰嚭搴忓垪 {
 
 	public int push(ArrayList<Integer> stackPushA, int pushAIndex, int popValue) {
 		for (int i = pushAIndex; i < stackPushA.size(); i++) {
@@ -17,7 +15,7 @@ public class 栈的压入弹出序列 {
 		return -1;
 	}
 	/**
-	 * 有更简洁的方法
+	 * 锟叫革拷锟斤拷锟侥凤拷锟斤拷
 	 * @param pushA
 	 * @param popA
 	 * @return
@@ -57,7 +55,7 @@ public class 栈的压入弹出序列 {
 	}
 
 	public static void main(String[] args) {
-		栈的压入弹出序列 run = new 栈的压入弹出序列();
+		鏍堢殑鍘嬪叆寮瑰嚭搴忓垪 run = new 鏍堢殑鍘嬪叆寮瑰嚭搴忓垪();
 //		int[] pushA = { 1 };
 //		int[] popA = { 1 };
 //		boolean b = run.IsPopOrder(pushA, popA);
