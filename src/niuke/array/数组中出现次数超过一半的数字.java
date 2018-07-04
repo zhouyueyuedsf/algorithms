@@ -8,26 +8,63 @@ package niuke.array;
  */
 public class 数组中出现次数超过一半的数字 {
 
-   //超过一半的数字，则必定有两个连续的3,3,3,3,2,2,2,2,2
+
     public int MoreThanHalfNum_Solution(int [] array) {
-//        int A[] = new int[array.length];
-        int more = 0;
-        int value;
-        for (int i = 1; i < array.length; i++){
-            if (array[i - 1] == array[i]){
-                value = array[i];
-                more++;
-            } else {
-                more = more - 1 < 0 ? 0 : more - 1;
-            }
-        }
         return 0;
     }
 
+    /**
+     * 快速排序
+     * @return
+     */
+    public int quickSort(){
+        return 0;
+    }
+
+    /**
+     * 分形叶思想
+     * @return
+     */
+    private int helper(int[] array){
+        if(array == null) return 0;
+        int len = array.length;
+
+        if(len < 1) {
+            return 0;
+        }
+
+        int result = array[0];
+        int time = 0;
+        for (int i = 1; i < len; i++){
+            if(time == 0) {
+                result = array[i];
+                time = 1;
+            } else {
+                if(result == array[i]){
+                    time++;
+                } else {
+                    time--;
+                }
+            }
+        }
+        time = 0;
+        for(int i = 0; i < len; i++){
+            if(result == array[i]){
+                time++;
+            }
+        }
+
+        if(time*2 <= len){
+            result=0;
+        }
+        return result;
+    }
 
 
     public static void main(String[] args) {
         数组中出现次数超过一半的数字 run = new 数组中出现次数超过一半的数字();
+        int[] array = {1,2};
 
+        System.out.println( run.helper(array));
     }
 }
