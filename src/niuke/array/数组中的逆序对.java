@@ -1,17 +1,21 @@
-package sort;
-
+package niuke.array;
 
 import common.Utils;
 
-/**
- * 先分，分到len=2为止，再合并
- */
-public class 归并排序 {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
-    private void mergeSort(int[] arr, int n, int left, int right) {
-        if (right - left < 2) {
-            if (arr[left] > arr[right]) {
+public class 数组中的逆序对 {
+
+    int count = 0;
+    private void mergeSort(int[] arr, int n, int left, int right){
+        if(right - left <= 0) return;
+        if(right - left == 1){
+            if(arr[left] >  arr[right]){
                 Utils.swap(arr, left, right);
+                count++;
             }
             return;
         }
@@ -35,6 +39,7 @@ public class 归并排序 {
                 i++;
             } else {
                 temp[index] = arr[j];
+                count += mid - i + 1;
                 j++;
             }
             index++;
@@ -57,19 +62,12 @@ public class 归并排序 {
             arr[left + k] = temp[k];
         }
     }
-
-    public void mergeSort(int[] arr) {
-        mergeSort(arr, arr.length, 0, arr.length - 1);
-    }
-
-
-    final void fun(final int j){
-        final int  i = 0;
+    public int InversePairs(int [] array) {
+        mergeSort(array, array.length, 0, array.length - 1);
+        return count;
     }
     public static void main(String[] args) {
-        归并排序 run = new 归并排序();
-        int[] arr = {2, 1, 4, 1, 24, 1, 51, 24};
-        run.mergeSort(arr);
-        System.out.println(arr);
+        数组中的逆序对 run = new 数组中的逆序对();
+        System.out.println(run.InversePairs(new int[]{}));;
     }
 }
