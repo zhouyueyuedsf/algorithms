@@ -3,7 +3,7 @@ package niuke.linklist;
 import common.RandomListNode;
 
 /**
- * �ܾ������Ŀѽ
+ *
  * 
  * @author zhouyueyue1
  *
@@ -42,12 +42,10 @@ public class 复杂链表的复制 {
 	}
 
 	/**
-	 * �÷��� ��ţ����ͨ���� ��δ�ҵ�ԭ��
 	 * @param pHead
 	 * @return
 	 */
 	public RandomListNode Clone(RandomListNode pHead) {
-		// first step: ���ƽڵ㣬������������
 		RandomListNode curNode = pHead;
 		while (curNode != null) {
 			RandomListNode newNode = new RandomListNode(curNode.label);
@@ -56,12 +54,10 @@ public class 复杂链表的复制 {
 			curNode = newNode.next;
 		}
 		curNode = pHead;
-		// second: ����random�Ĳ���
 		while (curNode != null && curNode.next != null && curNode.random != null) {
 			curNode.next.random = curNode.random.next;
 			curNode = curNode.next.next;
 		}
-		// third: �ֿ�����
 		curNode = pHead;
 		int count = 0;
 
