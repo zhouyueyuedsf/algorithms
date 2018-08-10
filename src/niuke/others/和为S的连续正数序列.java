@@ -1,4 +1,4 @@
-package niuke.linklist;
+package niuke.others;
 
 import java.util.ArrayList;
 
