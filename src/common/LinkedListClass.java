@@ -16,6 +16,13 @@ public class LinkedListClass {
         return head;
     }
 
+    public static void print(ListNode listNode){
+        while (listNode != null) {
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
+    }
+
     public static void main(String[] args) {
         ListNode node = LinkedListClass.ArrayToList("1,2,3");
         System.out.println(node);
