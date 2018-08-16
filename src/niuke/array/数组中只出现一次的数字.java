@@ -18,7 +18,6 @@ public class 数组中只出现一次的数字 {
     public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
     }
 
-
     public static void main(String[] args) {
         数组中只出现一次的数字 run = new 数组中只出现一次的数字();
     }

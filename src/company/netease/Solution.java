@@ -2,6 +2,9 @@ package company.netease;
 
 import java.util.Scanner;
 
+/**
+ * https://www.nowcoder.com/test/question/0f52adb3946249f9bb63d964658b2691?pid=11647029&tid=17508883 第1题
+ */
 public class Solution {
 
 
