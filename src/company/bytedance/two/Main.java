@@ -2,16 +2,13 @@ package company.bytedance.two;
 
 import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    public static class Point{
+    public static class Point {
         int x;
         int y;
     }
-
 
 
     public static void main(String[] args) {
@@ -34,35 +31,46 @@ public class Main {
             }
         });
 
-        int max = -1;
-        int maxIndex = -1;
-        for (int i = 0; i < num - 1; i++) {
-            Point point = points[i];
-            boolean flag = false;
-            if (point.y < max && i < maxIndex) {
-                continue;
+        Map<Point, Integer> map = new TreeMap<>(new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                return o2.y - o1.y;
             }
-            if (i < maxIndex) {
+        });
+
+        for (int i = 0; i < num; i++) {
+            map.put(points[i], i);
+        }
+
+
+        int index = -1;
+        for (Map.Entry entry : map.entrySet()) {
+            if ((int) entry.getValue() > index) {
+                Point point = (Point) entry.getKey();
                 System.out.println(point.x + " " + point.y);
-                continue;
-            }
-            max = point.y;
-            maxIndex = i + 1;
-            for (int j = i + 1; j < num; j++) {
-                Point readyPoint = points[j];
-                if (readyPoint.y > point.y) {
-                    flag = true;
-                    max = Math.max(max, readyPoint.y);
-                    maxIndex = j;
-                    break;
-                }
-            }
-            if (!flag) {
-                System.out.println(point.x + " " + point.y);
+                index = (int) entry.getValue();
             }
         }
-        if (num > 0)
-        System.out.println(points[num - 1].x + " " +points[num - 1].y);
+
+//        int max = -1;
+//        int maxIndex = -1;
+//        for (int i = 0; i < num - 1; i++) {
+//            for (int j = i; j < num; j++) {
+//                Point readyPoint = points[j];
+//                if (readyPoint.y > max) {
+//                    max = readyPoint.y;
+//                    maxIndex = j;
+//                }
+//            }
+//            if (maxIndex != num - 1) {
+//                max = -1;
+//                System.out.println(points[maxIndex].x + " " + points[maxIndex].y);
+//            }
+//            i = maxIndex;
+//
+//        }
+//        if (num > 0)
+//        System.out.println(points[num - 1].x + " " +points[num - 1].y);
     }
 
 }
