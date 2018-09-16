@@ -9,14 +9,14 @@ public class Graphm {
      * matrix[i][j]表示节点i到j的权重
      */
     int[][] matrix;
-    int numVertex;
+    public int numVertex;
     boolean[] mark;
 
-    Graphm(){
+    public Graphm(){
 
     }
 
-    Graphm(int n) {
+    public Graphm(int n) {
         init(n, true);
     }
 
@@ -61,7 +61,11 @@ public class Graphm {
         return numVertex;
     }
 
-    public void setMark(int v){
-        mark[v] = true;
+    public void setMark(int v, boolean b){
+        mark[v] = b;
+    }
+
+    public boolean getMark(int w) {
+        return mark[w];
     }
 }

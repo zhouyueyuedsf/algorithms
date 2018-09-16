@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * 超时算法
- * 较好食思路:https://fengxc.me/2018网易笔试题及解答-Java.html#more
+ * 较好的思路:https://fengxc.me/2018网易笔试题及解答-Java.html#more
  */
 public class Main2 {
     public static int sumRange(int[] arr, int start, int end, int[] isAlive, boolean isCalZero) {

@@ -9,12 +9,15 @@ import java.util.HashMap;
 public class Graphl {
 
     class GraphlNode{
-        int val;
+        /**
+         * 每个节点的唯一标识
+         */
+        int key;
         public GraphlNode next = null;
         public GraphlNode tail = null;
         int weight;
-        public GraphlNode(int val) {
-            this.val = val;
+        public GraphlNode(int key) {
+            this.key = key;
         }
     }
     /**
@@ -23,7 +26,7 @@ public class Graphl {
      */
     public HashMap<Integer, GraphlNode> mapHeaders = new HashMap<>();
     boolean[] mark;
-    int numVertex;
+    public int numVertex;
 
     public Graphl(int n) {
         init(n, true);
@@ -66,7 +69,7 @@ public class Graphl {
         if (cur.next == null) {
             return numVertex;
         } else {
-            return cur.next.val;
+            return cur.next.key;
         }
     }
 
@@ -75,14 +78,14 @@ public class Graphl {
         if (cur == null) {
             return numVertex;
         }
-        while (cur.val != w) {
+        while (cur.key != w) {
             cur = cur.next;
         }
         //w刚好是最后，用numVertex表示是最后
         if (cur.next == null) {
             return numVertex;
         } else {
-            return cur.next.val;
+            return cur.next.key;
         }
     }
 
@@ -94,12 +97,6 @@ public class Graphl {
         return mark[v];
     }
 
-//    public void setList(int[] arr) {
-//        ListNode header = new ListNode(arr[0]);
-//        ListNode cur = header;
-//        for (int i = 1; i < arr.length; i++) {
-//            cur = (cur.next = new ListNode(arr[i]));
-//        }
-//        listHeaders.add(header);
-//    }
+
+
 }

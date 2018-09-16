@@ -2,6 +2,9 @@ package company.netease.three;
 
 import java.util.Scanner;
 
+/**
+ * bbw->bwb: bbwbbw
+ */
 public class Main2 {
 
     public static String reverse(String str){
