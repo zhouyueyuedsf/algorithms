@@ -1,4 +1,4 @@
-package leetcode.tree.random;
+package leetcode.random;
 
 import java.util.ArrayList;
 import java.util.List;
