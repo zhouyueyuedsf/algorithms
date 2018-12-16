@@ -48,15 +48,28 @@ public class Graphl {
     public void setEdge(int v, int w, int weight) {
         if (mapHeaders.containsKey(v)) {
             GraphlNode cur = mapHeaders.get(v);
+            GraphlNode head = cur;
             cur = (cur.tail.next = new GraphlNode(w));
             cur.weight = weight;
-            cur.tail = cur;
+            head.tail = cur;
         } else {
             GraphlNode head = new GraphlNode(v);
             mapHeaders.put(v, head);
             head.next = new GraphlNode(w);
             head.tail = head.next;
             head.tail.weight = w;
+        }
+    }
+
+    public void removeEdge(int v, int w) {
+        if (mapHeaders.containsKey(v)) {
+            GraphlNode cur = mapHeaders.get(v);
+            while (cur != null) {
+                if (cur.next != null && cur.next.key == w) {
+                    cur.next = cur.next.next;
+                }
+                cur = cur.next;
+            }
         }
     }
 
@@ -91,6 +104,12 @@ public class Graphl {
 
     public void setMark(int v, boolean isMark) {
         mark[v] = isMark;
+    }
+
+    public void reSetMark() {
+        for (int i = 0; i < mark.length; i++) {
+            mark[i] = false;
+        }
     }
 
     public boolean getMark(int v) {
