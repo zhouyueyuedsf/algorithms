@@ -82,12 +82,11 @@ public class Problem_06_HanoiStack {
 
 	public static void main(String[] args) {
 		int num = 3;
-
 		// solution 1
 		int steps1 = hanoiProblem1(num, "left", "mid", "right");
 		System.out.println("It will move " + steps1 + " steps.");
 		System.out.println("===================================");
-
+//		List<List<String>> solutions = new ArrayList<>();
 		// solution 2
 //		int steps2 = hanoiProblem2(num, "left", "mid", "right");
 //		System.out.println("It will move " + steps2 + " steps.");

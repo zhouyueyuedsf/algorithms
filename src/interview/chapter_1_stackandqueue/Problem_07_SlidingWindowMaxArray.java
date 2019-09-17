@@ -3,15 +3,22 @@ package interview.chapter_1_stackandqueue;
 import java.util.LinkedList;
 
 public class Problem_07_SlidingWindowMaxArray {
-
+	/**
+	 * 记录索引值
+	 * @param arr
+	 * @param w
+	 * @return
+	 */
 	public static int[] getMaxWindow(int[] arr, int w) {
 		if (arr == null || w < 1 || arr.length < w) {
 			return null;
 		}
+		//双端队列
 		LinkedList<Integer> qmax = new LinkedList<Integer>();
 		int[] res = new int[arr.length - w + 1];
 		int index = 0;
 		for (int i = 0; i < arr.length; i++) {
+			//始终要维持一个长度灵活变化的递减的双端队列，知道哪些值被淘汰，知道哪些值存储（值的淘汰机制）
 			while (!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[i]) {
 				qmax.pollLast();
 			}

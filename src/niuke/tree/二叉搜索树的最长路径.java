@@ -9,6 +9,7 @@ public class 二叉搜索树的最长路径 {
     public int diameterOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
         maxLenth(root);
+
         return max;
     }
     public int maxLenth(TreeNode root){
