@@ -42,11 +42,10 @@ object ArrayClass {
                 }
             }
         }
-        val resArr = Array<IntArray>(size = res.size, init = {
+        //        res.toArray(resArr)
+        return Array(size = res.size, init = {
             res[it]
         })
-//        res.toArray(resArr)
-        return resArr
     }
 }
 
