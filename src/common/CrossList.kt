@@ -4,68 +4,142 @@ package common
 /**
  * 十字链表节点构造
  */
-data class Node(
-        var rowId: Int = 0,
-        var colId: Int = 0,
+class Node(
+        var rowId: Int? = 0,
+        var colId: Int? = 0,
         var color: Int = 0,
+        var item: Item ?= null,
         var rowNext: Node? = null,
         var colNext: Node? = null
 )
 
-
-class Item(
-        var id: Int
+open class Item(
+        var id: Int?
 )
 
-data class ItemEdge(
+open class ItemEdge(
         var startItem: Item,
         var endItem: Item
 )
+class Lang(id: Int?, val abbr: String? = null) : Item(id) {
+}
+class LangToLang(start: Lang, end: Lang): ItemEdge(start, end) {
 
+}
 /**
- * orgin： 数据类型要求如下 [[A->B,A->C],[B->C,B->D]]
+ * origin： 数据类型要求如下 [[A->B,A->C],[B->C,B->D]]
  */
-class CrossList(var orgin: List<List<ItemEdge>>, var sceneColor: Int) {
+open class CrossList<out T: ItemEdge>(origin: List<List<T>>, sceneColor: Int) {
     private val rowHeadNodeMap = hashMapOf<Int, Node>()
     private val colHeadNodeMap = hashMapOf<Int, Node>()
-
     init {
-        val colNodeSetMap = hashMapOf<Int, Set<Node>>()
-//        按行遍历，确定rowHeadNodeMap
-        for (itemEdgeArr in orgin) {
-            val rowHeadNode = Node()
-            var curHeadNode = rowHeadNode
-            var arrId = 0
+        createOrUpdate(origin, sceneColor)
+//        val colNodeSetMap = hashMapOf<Int, HashSet<Node>>()
+////        按行遍历，确定rowHeadNodeMap
+//        for (itemEdgeArr in origin) {
+//            val rowHeadNode = Node()
+//            var curHeadNode = rowHeadNode
+//            var arrId = 0
+//            for (itemEdge in itemEdgeArr) {
+//                val rowId = itemEdge.startItem.id
+//                val colId = itemEdge.endItem.id
+//                val color = sceneColor
+//                val node = Node(rowId, colId, color)
+//                curHeadNode.rowId = rowId
+//                curHeadNode.rowNext = node
+//                curHeadNode = node
+//                arrId = rowId
+//
+//                if (colNodeSetMap.containsKey(colId)) {
+//                    val set = colNodeSetMap[colId]
+//                    set?.add(node)
+//                } else {
+//                    val set = hashSetOf<Node>()
+//                    set.add(node)
+//                    colNodeSetMap[colId] = set
+//                }
+//            }
+//            rowHeadNodeMap[arrId] = rowHeadNode
+//        }
+////        遍历列
+//        for (colNodeSetEntry in colNodeSetMap) {
+//            val set = colNodeSetEntry.value
+//            val colHeadNode = Node()
+//            var curHeadNode = colHeadNode
+//            var arrId = 0
+//            for (node in set) {
+//                curHeadNode.colId = node.colId
+//                curHeadNode.colNext = node
+//                curHeadNode = node
+//                arrId = curHeadNode.colId
+//            }
+//            colHeadNodeMap[arrId] = colHeadNode
+//        }
+    }
+    fun createOrUpdate(origin: List<List<ItemEdge>>, sceneColor: Int) {
+        for (itemEdgeArr in origin) {
             for (itemEdge in itemEdgeArr) {
-                val rowId = itemEdge.startItem.id
-                val colId = itemEdge.endItem.id
-                val color = sceneColor
-                val node = Node(rowId, colId, color)
-                curHeadNode.rowNext = node
-                curHeadNode = node
-                arrId = rowId
-
-                val set = colNodeSetMap.getOrDefault(colId, setOf())
-                set.plus(node)
-                colNodeSetMap[colId] = set
+//                val rowId = itemEdge.startItem.id
+//                val colId = itemEdge.endItem.id
+//                val color = sceneColor
+                addOrUpdate(itemEdge, sceneColor)
             }
-            rowHeadNodeMap[arrId] = rowHeadNode
-        }
-//        遍历列
-        for (colNodeSetEntry in colNodeSetMap) {
-            val set = colNodeSetEntry.value
-            val colHeadNode = Node()
-            var curHeadNode = colHeadNode
-            var arrId = 0
-            for (node in set) {
-                curHeadNode.colNext = node
-                curHeadNode = node
-                arrId = curHeadNode.colId
-            }
-            colHeadNodeMap[arrId] = colHeadNode
         }
     }
+    private fun addOrUpdate(edge: ItemEdge, sceneColor: Int) {
+        val rowId = edge.startItem.id
+        val colId = edge.endItem.id
+        if (colId == null || rowId == null) {
+            return
+        }
+        var headNode = rowHeadNodeMap[rowId]
+        var curNode = headNode
+//        给行头结点上色
+        if (headNode != null) {
+            headNode.color = headNode.color.or(sceneColor)
+        }
+        while (curNode != null) {
+            if (curNode.colId == colId) {
+                if (!hasColor(curNode.color, sceneColor)) {
+                    curNode.color = curNode.color.or(sceneColor)
+                }
+//                列头结点上色
+                headNode = colHeadNodeMap[colId]
+                if (headNode != null && !hasColor(headNode.color, sceneColor)) {
+                    headNode.color = headNode.color.or(sceneColor)
+                }
+                return
+            }
+            curNode = curNode.rowNext
+        }
+        addNode(edge.startItem, edge.endItem, sceneColor)
+    }
 
+    private fun addNode(start: Item, end: Item, color: Int) {
+        val rowId = start.id!!
+        val colId = end.id!!
+        var headNode = rowHeadNodeMap[rowId]
+        val node = Node(rowId, colId, color)
+        // 处理行指针
+        if (headNode == null) {
+            headNode = Node(rowId, null, color, start)
+            rowHeadNodeMap[rowId] = headNode
+        }
+        var nextNode = headNode.rowNext
+        node.rowNext = nextNode
+        headNode.rowNext = node
+        // 处理列指针
+        headNode = colHeadNodeMap[colId]
+        if (headNode == null) {
+            headNode = Node(null, colId, color, end)
+            colHeadNodeMap[colId] = headNode
+        }
+        nextNode = headNode.colNext
+        node.colNext = nextNode
+        headNode.colNext = node
+    }
+
+    private fun hasColor(mainColor: Int, color: Int) = mainColor.and(color) == color
     /**
      * 得到出度
      */
@@ -88,22 +162,23 @@ class CrossList(var orgin: List<List<ItemEdge>>, var sceneColor: Int) {
         }
         return items
     }
-}
 
-fun main() {
-    val arrList = arrayListOf<ArrayList<ItemEdge>>()
-    for (i in 0 .. 6) {
-        val item1 = Item(i)
-        val item2 = Item(i + 6)
-        val item3 = Item(i + 7)
-        val list = arrayListOf<ItemEdge>()
-        list.add(ItemEdge(item1, item2))
-        list.add(ItemEdge(item1, item3))
-        arrList.add(list)
+    fun chooseRowListByColor(maskColor: Int) = run {
+        val list = arrayListOf<Item>()
+        for (entry in rowHeadNodeMap) {
+            if (entry.value.item != null && entry.value.color.and(maskColor) == maskColor) {
+                list.add(entry.value.item!!)
+            }
+        }
+        list
     }
-    val crossList = CrossList(arrList, 1)
-
-//    arrList[2][2]
-    val res = crossList.getInItemsById(6)
-    print(res)
+    fun chooseColListByColor(maskColor: Int) = run {
+        val list = arrayListOf<Item?>()
+        for (entry in colHeadNodeMap) {
+            if (entry.value.item != null && entry.value.color.and(maskColor) == maskColor) {
+                list.add(entry.value.item)
+            }
+        }
+        list
+    }
 }
