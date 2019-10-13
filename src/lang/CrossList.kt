@@ -21,19 +21,29 @@ open class ItemEdge(
         var startItem: Item,
         var endItem: Item
 )
-class Lang(id: Int?, val abbr: String? = null) : Item(id) {
+class Lang(id: Int? = null,
+           val englishName: String? = null,
+           val localName: String? = null,
+           val abbr: String? = null,
+           val ietf: String? = null) : Item(id) {
+
+    override fun toString(): String {
+        return "id = $id, englishName = $englishName, localName$localName, abbr = $abbr"
+    }
 }
-class LangToLang(start: Lang, end: Lang): ItemEdge(start, end) {
+class LangToLang(from: Lang, to: Lang): ItemEdge(from, to) {
 
 }
 /**
  * origin： 数据类型要求如下 [[A->B,A->C],[B->C,B->D]]
  */
-open class CrossList<out T: ItemEdge>(origin: List<List<T>>, sceneColor: Int) {
-    private val rowHeadNodeMap = hashMapOf<Int, Node>()
-    private val colHeadNodeMap = hashMapOf<Int, Node>()
+open class CrossList<out T: ItemEdge>(origin: List<List<T>>?, sceneColor: Int) {
+    val rowHeadNodeMap = LinkedHashMap<Int, Node>()
+    val colHeadNodeMap = LinkedHashMap<Int, Node>()
     init {
-        createOrUpdate(origin, sceneColor)
+        if (origin != null) {
+            createOrUpdate(origin, sceneColor)
+        }
 //        val colNodeSetMap = hashMapOf<Int, HashSet<Node>>()
 ////        按行遍历，确定rowHeadNodeMap
 //        for (itemEdgeArr in origin) {
@@ -76,6 +86,7 @@ open class CrossList<out T: ItemEdge>(origin: List<List<T>>, sceneColor: Int) {
 //            colHeadNodeMap[arrId] = colHeadNode
 //        }
     }
+    open fun onPreCreate(){}
     fun createOrUpdate(origin: List<List<ItemEdge>>, sceneColor: Int) {
         for (itemEdgeArr in origin) {
             for (itemEdge in itemEdgeArr) {
@@ -139,25 +150,29 @@ open class CrossList<out T: ItemEdge>(origin: List<List<T>>, sceneColor: Int) {
         headNode.colNext = node
     }
 
-    private fun hasColor(mainColor: Int, color: Int) = mainColor.and(color) == color
+    open fun hasColor(mainColor: Int, color: Int) = mainColor.and(color) == color
     /**
      * 得到出度
      */
-    fun getOutItemsById(id: Int): List<Item> {
+    fun getOutItemsById(id: Int, color: Int): List<Item> {
         var head = rowHeadNodeMap[id]
         val items = arrayListOf<Item>()
         while (head != null) {
-            items.add(Item(head.rowId))
+            if (head.colId != null && hasColor(head.color, color)) {
+                items.add(Item(head.colId))
+            }
             head = head.rowNext
         }
         return items
     }
 
-    fun getInItemsById(id: Int): List<Item> {
+    fun getInItemsById(id: Int, color: Int): List<Item> {
         var head = colHeadNodeMap[id]
         val items = arrayListOf<Item>()
         while (head != null) {
-            items.add(Item(head.colId))
+            if (head.rowId != null && hasColor(head.color, color)) {
+                items.add(Item(head.rowId))
+            }
             head = head.colNext
         }
         return items
