@@ -2,6 +2,7 @@ package leetcode.array
 
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.random.Random
 
 
 /**
@@ -60,6 +61,7 @@ fun merge(nums1: IntArray, nums2: IntArray): Double {
     }
 }
 
+var round = 0
 /**
  * 正解
  * 关键在与利用排好序的数组进行加速查找，类似于查找k小的方式去处理了
@@ -76,12 +78,13 @@ fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
     var right = -1
     var index = 0
     var curTargetPos = midPos
+    round = 0
     while (index < midPos + 1) {
         left = right
         curTargetPos = if (curTargetPos.shr(1) == 0) 1 else curTargetPos.shr(1)
         var usedCount = 0
         val s1Delta = min(max(s1Index, m - 1), curTargetPos - 1)
-        val s2Delta = min(max(s2Index, m - 1), curTargetPos - 1)
+        val s2Delta = min(max(s2Index, n - 1), curTargetPos - 1)
         val s1IndexTemp = s1Index + s1Delta
         val s2IndexTemp = s2Index + s2Delta
         var s1Value = Int.MAX_VALUE
@@ -98,6 +101,7 @@ fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
             s2Value
         }
         index += usedCount
+        round++
     }
     return if ((m + n).and(1) == 0) {
         (left + right).toDouble() / 2
@@ -106,6 +110,47 @@ fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
     }
 }
 
+fun findMedianSortedArrays2(nums1: IntArray, nums2: IntArray): Double {
+    val n = nums1.size
+    val m = nums2.size
+    val left = (n + m + 1) / 2
+    val right = (n + m + 2) / 2
+    round = 0
+    //将偶数和奇数的情况合并，如果是奇数，会求两次同样的 k 。
+    return (getKth(nums1, 0, n - 1, nums2, 0, m - 1, left) + getKth(nums1, 0, n - 1, nums2, 0, m - 1, right)) * 0.5
+}
+
+fun getKth(nums1: IntArray, start1: Int, end1: Int, nums2: IntArray, start2: Int, end2: Int, k: Int): Int {
+    val len1 = end1 - start1 + 1
+    val len2 = end2 - start2 + 1
+    //让 len1 的长度小于 len2，这样就能保证如果有数组空了，一定是 len1
+    if (len1 > len2) return getKth(nums2, start2, end2, nums1, start1, end1, k)
+    if (len1 == 0) return nums2[start2 + k - 1]
+    if (k == 1) return nums1[start1].coerceAtMost(nums2[start2])
+    val i = start1 + len1.coerceAtMost(k / 2) - 1
+    val j = start2 + len2.coerceAtMost(k / 2) - 1
+    return if (nums1[i] > nums2[j]) {
+        round++
+        getKth(nums1, start1, end1, nums2, j + 1, end2, k - (j - start2 + 1))
+    } else {
+        round++
+        getKth(nums1, i + 1, end1, nums2, start2, end2, k - (i - start1 + 1))
+    }
+}
+
 fun main() {
-    print(findMedianSortedArrays(intArrayOf(1, 1, 3, 3), intArrayOf(1, 1, 3, 3)))
+
+    val nums1 = IntArray(1000) { 1 }
+    val nums2 = IntArray(1000) { 2 }
+    for (index in nums1.indices) {
+        nums1[index] = (10000..500000).random()
+        nums2[index] = (1000..10000000).random()
+    }
+    nums1.sort()
+    nums2.sort()
+
+    findMedianSortedArrays2(nums1, nums2)
+    println(round)
+    findMedianSortedArrays(nums1, nums2)
+    println(round)
 }
