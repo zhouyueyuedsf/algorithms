@@ -1,7 +1,7 @@
 package lang
 
 import common.Item
-import common.Lang
+import common.CommonLanguage
 import common.LangToLang
 
 
@@ -364,9 +364,9 @@ class LangProvider {
         /**
          * id直接作为数组索引
          */
-        fun getLangInstant(lang: Lang): Lang? {
+        fun getLangInstant(lang: CommonLanguage): CommonLanguage? {
             val id = lang.id
-            var resLang: Lang? = null
+            var resLang: CommonLanguage? = null
             if (id != null) {
                 return getLangById(id)
             } else if (lang.abbr != null) {
@@ -376,8 +376,8 @@ class LangProvider {
             return resLang
         }
 
-        fun getSupportLangList(to: Lang, sceneFlag: Int, from: Boolean): List<Lang> {
-            val langList = arrayListOf<Lang>()
+        fun getSupportLangList(to: CommonLanguage, sceneFlag: Int, from: Boolean): List<CommonLanguage> {
+            val langList = arrayListOf<CommonLanguage>()
             val queryLang = getLangInstant(to)
             val list = if (from) {
                 sLangCrossList.getOutItemsById(queryLang!!.id!!, sceneFlag)
@@ -393,7 +393,7 @@ class LangProvider {
                         }
                     }
                     if (!flag) {
-                        langList.add(lang as Lang)
+                        langList.add(lang as CommonLanguage)
                     }
                 }
             } else {
@@ -407,34 +407,34 @@ class LangProvider {
         /**
          * 通过id得到语言
          */
-        fun getLangById(id: Int): Lang? {
-            return sLangs?.get(id) as Lang
+        fun getLangById(id: Int): CommonLanguage? {
+            return sLangs?.get(id) as CommonLanguage
         }
 
         // rowId colId代表唯一内存索引
         fun createIntern(): LangCrossList {
             val voiceArrList = arrayListOf<ArrayList<LangToLang>>()
             val size = ENGLISH_NAME.size
-            val fromLangs = arrayListOf<Lang>()
-            val toLangs = arrayListOf<Lang>()
+            val fromLangs = arrayListOf<CommonLanguage>()
+            val toLangs = arrayListOf<CommonLanguage>()
 
             val ietfSize = IETF.size
             for (rowId in 0 until size) {
-                val from = Lang(rowId, ENGLISH_NAME[rowId], LOCAL_NAME[rowId], ABBR[rowId], if (rowId < ietfSize) IETF[rowId] else null)
+                val from = CommonLanguage(rowId, ENGLISH_NAME[rowId], LOCAL_NAME[rowId], ABBR[rowId], if (rowId < ietfSize) IETF[rowId] else null)
                 fromLangs.add(from)
             }
             for (colId in 0 until size) {
-                val to = Lang(colId, ENGLISH_NAME[colId], LOCAL_NAME[colId], ABBR[colId], if (colId < ietfSize) IETF[colId] else null)
+                val to = CommonLanguage(colId, ENGLISH_NAME[colId], LOCAL_NAME[colId], ABBR[colId], if (colId < ietfSize) IETF[colId] else null)
                 toLangs.add(to)
             }
             val crossList = LangCrossList(fromLangs, toLangs)
 //           构造voice
             for (rowId in 0 until ietfSize) {
-                val from = Lang(rowId, ENGLISH_NAME[rowId], LOCAL_NAME[rowId], ABBR[rowId], IETF[rowId])
+                val from = CommonLanguage(rowId, ENGLISH_NAME[rowId], LOCAL_NAME[rowId], ABBR[rowId], IETF[rowId])
                 val list = arrayListOf<LangToLang>()
                 for (colId in 0 until ietfSize) {
                     if (colId != rowId) {
-                        val to = Lang(colId, ENGLISH_NAME[colId], LOCAL_NAME[colId], ABBR[colId], IETF[rowId])
+                        val to = CommonLanguage(colId, ENGLISH_NAME[colId], LOCAL_NAME[colId], ABBR[colId], IETF[rowId])
                         list.add(LangToLang(from, to))
                     }
                 }
@@ -452,7 +452,7 @@ class LangProvider {
 fun main() {
     val crossList = LangProvider.sLangCrossList
     println(LangProvider.getLangById(12))
-    println(LangProvider.getLangInstant(Lang(abbr = "zh-CN")))
-    val supportFromList = LangProvider.getSupportLangList(Lang(abbr = "ur"), 2, true)
+    println(LangProvider.getLangInstant(CommonLanguage(abbr = "zh-CN")))
+    val supportFromList = LangProvider.getSupportLangList(CommonLanguage(abbr = "ur"), 2, true)
     print(1)
 }
