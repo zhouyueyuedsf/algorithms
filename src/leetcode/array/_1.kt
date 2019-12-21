@@ -19,16 +19,42 @@ package leetcode.array
 
 // 一次遍历hash
 // 可以遍历的根本原因是a+b=t, 那么其差值集合{t-b, t-a}必然存在一个前后的顺序关系，所以最终就一定能找到
-fun twoSum(nums: IntArray, target: Int): IntArray {
-    // 可以用spasreArray
-    val map = hashMapOf<Int, Int>()
-    for (index in nums.indices) {
-        val reduction = target - nums[index]
-        if (map.containsKey(reduction)) {
-            return intArrayOf(map[reduction]!!, index)
+object _1{
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        // 可以用spasreArray
+        val map = hashMapOf<Int, Int>()
+        for (index in nums.indices) {
+            val reduction = target - nums[index]
+            if (map.containsKey(reduction)) {
+                return intArrayOf(map[reduction]!!, index)
+            }
+            map[nums[index]] = index
         }
-        map[nums[index]] = index
+        return intArrayOf(-1, -1)
     }
-    return intArrayOf(-1, -1)
-}
 
+    /**
+     * 双指针，这里的缺点就是很难找到对应的index，在指定效率上只能找到对应的值
+     */
+    fun twoSum2(nums: IntArray, target: Int): IntArray {
+        nums.sort()
+        var start = 0
+        var end = nums.size - 1
+        while (start < end) {
+            val guideValue = nums[start] + nums[end]
+            when {
+                guideValue < target -> {
+                    start++
+                }
+                guideValue > target -> {
+                    end--
+                }
+                else -> {
+                    return intArrayOf(nums[start], nums[end])
+                }
+            }
+        }
+        return intArrayOf(-1, -1)
+    }
+
+}

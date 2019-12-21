@@ -5,7 +5,6 @@ import java.util.*
 object ArrayClass {
     //    [[1,2],[3,4]]
     fun stringToIntArray(str: String): Array<IntArray> {
-
         val res = arrayListOf<IntArray>()
         var curNum = ""
         val stack = Stack<Char>()
