@@ -1,9 +1,7 @@
 package leetcode.array
 
-import leetcode.array._16.threeSumClosest
 import leetcode.array._16.threeSumClosest2
 import kotlin.math.abs
-import kotlin.math.min
 
 /**
  * 给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
@@ -17,13 +15,14 @@ import kotlin.math.min
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 
+
 object _16 {
     /**
+     * 三数之和最接近
      *  此题分析题目是是关键，见三星note笔记
      */
     fun threeSumClosest(nums: IntArray, target: Int): Int {
         nums.sort()
-        val minSumList = sortedSetOf<Int>()
         val size = nums.size
         var anchorIndex = size - 1
         var res = 0
@@ -103,5 +102,5 @@ object _16 {
 }
 
 fun main() {
-    println(threeSumClosest2(intArrayOf(-3, -2, -5, 3, -4), -1))
+    println(threeSumClosest2(intArrayOf(1, 0, -1, 0, -2, 2), 0))
 }

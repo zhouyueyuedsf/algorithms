@@ -19,6 +19,7 @@ package leetcode.array
  */
 
 /**
+ * 三数之和等于0
  * 双指针
  */
 fun threeSum(nums: IntArray): List<List<Int>> {
