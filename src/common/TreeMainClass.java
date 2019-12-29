@@ -1,5 +1,6 @@
 package common;
 
+import common.TreeNode;
 import leetcode.PathSum;
 
 import java.io.BufferedReader;
@@ -11,7 +12,7 @@ import java.util.Queue;
 
 public class TreeMainClass {
 
-	public static TreeNode stringToTreeNode(String input) {
+	public static common.TreeNode stringToTreeNode(String input) {
 		input = input.trim();
 		input = input.substring(1, input.length() - 1);
 		if (input.length() == 0) {
@@ -20,13 +21,13 @@ public class TreeMainClass {
 		
 		String[] parts = input.split(",");
 		String item = parts[0];
-		TreeNode root = new TreeNode(Integer.parseInt(item));
-		Queue<TreeNode> nodeQueue = new LinkedList<>();
+		common.TreeNode root = new common.TreeNode(Integer.parseInt(item));
+		Queue<common.TreeNode> nodeQueue = new LinkedList<>();
 		nodeQueue.add(root);
 
 		int index = 1;
 		while (!nodeQueue.isEmpty()) {
-			TreeNode node = nodeQueue.remove();
+			common.TreeNode node = nodeQueue.remove();
 
 			if (index == parts.length) {
 				break;
@@ -36,7 +37,7 @@ public class TreeMainClass {
 			item = item.trim();
 			if (!item.equals("null")) {
 				int leftNumber = Integer.parseInt(item);
-				node.left = new TreeNode(leftNumber);
+				node.left = new common.TreeNode(leftNumber);
 				nodeQueue.add(node.left);
 			}
 
@@ -48,7 +49,7 @@ public class TreeMainClass {
 			item = item.trim();
 			if (!item.equals("null")) {
 				int rightNumber = Integer.parseInt(item);
-				node.right = new TreeNode(rightNumber);
+				node.right = new common.TreeNode(rightNumber);
 				nodeQueue.add(node.right);
 			}
 		}

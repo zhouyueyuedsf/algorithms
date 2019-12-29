@@ -2,13 +2,11 @@ package leetcode;
 
 //Definition for a binary tree node.
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
-
 import common.Solution;
 import common.TreeNode;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class PathSum extends Solution {
 	List<List<Integer>> lists = new LinkedList<>();
@@ -18,7 +16,6 @@ public class PathSum extends Solution {
 		if (root == null) {
 			return curSum;
 		}
-		;
 		int mid = root.val;
 		next.add(mid);
 		curSum += mid;
