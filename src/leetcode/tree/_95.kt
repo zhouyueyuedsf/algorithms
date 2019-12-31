@@ -66,6 +66,7 @@ object _95 {
             }
             if (index >= 0) {
                 val nodeList = subGenTrees(subArr.copyOfRange(0, index))
+                // 空是一种情况与rightRootList的大小为1等效（这可能是一种模型）
                 if (rightRootList.isEmpty()) {
                     nodeList.forEach {
                         root.left = it
