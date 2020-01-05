@@ -21,17 +21,17 @@ open class ItemEdge(
         var startItem: Item,
         var endItem: Item
 )
-class Lang(id: Int? = null,
-           val englishName: String? = null,
-           val localName: String? = null,
-           val abbr: String? = null,
-           val ietf: String? = null) : Item(id) {
+class CommonLanguage(id: Int? = null,
+                     val englishName: String? = null,
+                     val localName: String? = null,
+                     val abbr: String? = null,
+                     val ietf: String? = null) : Item(id) {
 
     override fun toString(): String {
         return "id = $id, englishName = $englishName, localName$localName, abbr = $abbr"
     }
 }
-class LangToLang(from: Lang, to: Lang): ItemEdge(from, to) {
+class LangToLang(from: CommonLanguage, to: CommonLanguage): ItemEdge(from, to) {
 
 }
 /**

@@ -21,14 +21,14 @@ class LangCrossList(origin: List<List<LangToLang>>?,
     fun getIndexHashMap(): HashMap<String, Int> {
         val hashMap = HashMap<String, Int>()
         for (entry in rowHeadNodeMap) {
-            hashMap[(entry.value.item as Lang).abbr!!] = entry.value.rowId!!
+            hashMap[(entry.value.item as CommonLanguage).abbr!!] = entry.value.rowId!!
         }
         return hashMap
     }
 
-//    fun getSupportIdListByFrom(from: Lang): List<Item> {
+//    fun getSupportIdListByFrom(from: CommonLanguage): List<Item> {
 //        var head = rowHeadNodeMap[from.id!!]
-//        val items = arrayListOf<Lang>()
+//        val items = arrayListOf<CommonLanguage>()
 //        while (head != null) {
 //            items.add(Item(head.rowId))
 //            head = head.rowNext
@@ -36,15 +36,15 @@ class LangCrossList(origin: List<List<LangToLang>>?,
 //        return items
 //    }
 
-    fun getRecentUsedLang(num: Int, color: Int? = 0): List<Lang> {
+    fun getRecentUsedLang(num: Int, color: Int? = 0): List<CommonLanguage> {
         val iterator = ArrayList<Map.Entry<Int, Node>>(rowHeadNodeMap.entries)
                 .listIterator(rowHeadNodeMap.size)
         //
         var count = 0
-        val list = arrayListOf<Lang>()
+        val list = arrayListOf<CommonLanguage>()
         while (iterator.hasPrevious() && count < count) {
             val entry = iterator.previous()
-            list.add(entry.value.item as Lang)
+            list.add(entry.value.item as CommonLanguage)
             count++
         }
         return list
