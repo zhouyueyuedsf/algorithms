@@ -1,6 +1,5 @@
 package common;
 
-import common.TreeNode;
 import leetcode.PathSum;
 
 import java.io.BufferedReader;
@@ -51,6 +50,50 @@ public class TreeMainClass {
 				int rightNumber = Integer.parseInt(item);
 				node.right = new common.TreeNode(rightNumber);
 				nodeQueue.add(node.right);
+			}
+		}
+		return root;
+	}
+
+	public static common.kotlin.Node stringToNode(String input) {
+		input = input.trim();
+		input = input.substring(1, input.length() - 1);
+		if (input.length() == 0) {
+			return null;
+		}
+
+		String[] parts = input.split(",");
+		String item = parts[0];
+		common.kotlin.Node root = new common.kotlin.Node(Integer.parseInt(item));
+		Queue<common.kotlin.Node> nodeQueue = new LinkedList<>();
+		nodeQueue.add(root);
+
+		int index = 1;
+		while (!nodeQueue.isEmpty()) {
+			common.kotlin.Node node = nodeQueue.remove();
+
+			if (index == parts.length) {
+				break;
+			}
+
+			item = parts[index++];
+			item = item.trim();
+			if (!item.equals("null")) {
+				int leftNumber = Integer.parseInt(item);
+				node.setLeft(new common.kotlin.Node(leftNumber));
+				nodeQueue.add(node.getLeft());
+			}
+
+			if (index == parts.length) {
+				break;
+			}
+
+			item = parts[index++];
+			item = item.trim();
+			if (!item.equals("null")) {
+				int rightNumber = Integer.parseInt(item);
+				node.setRight(new common.kotlin.Node(rightNumber));
+				nodeQueue.add(node.getRight());
 			}
 		}
 		return root;
