@@ -10,6 +10,8 @@ import common.kotlin.Node
 object _117 {
     /**
      * 上下两层通过上层的next指针进行层次遍历
+     *
+     * 可以用该方法做log2(n)空间消耗的层次遍历
      */
     fun connect(root: Node?): Node? {
         if (root == null) return null
