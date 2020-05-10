@@ -8,33 +8,39 @@ import common.kotlin.Node
  * @author joy zhou
  */
 object _117 {
-    var prev: Node? = null
-    var leftmost:Node? = null
-    fun processChild(childNode: Node?) {
-        if (childNode != null) {
-            if (this.prev != null) {
-                this.prev!!.next = childNode
-            } else {
-                this.leftmost = childNode
-            }
-            this.prev = childNode
-        }
-    }
-
+    var leftMost: Node? = null
     fun connect(root: Node?): Node? {
-        if (root == null) {
-            return root
-        }
-        this.leftmost = root
-        var curr: Node? = leftmost
-        while (this.leftmost != null) {
-            this.prev = null
-            curr = this.leftmost
-            this.leftmost = null
-            while (curr != null) {
-                processChild(curr.left)
-                processChild(curr.right)
-                curr = curr.next
+        if (root == null) return null
+        leftMost = root
+        var downNode = root
+        while (leftMost != null) {
+            var upNode = leftMost
+            while (true) {
+                if (leftMost?.left != null) {
+                    leftMost = leftMost?.left
+                    break
+                }
+                if (leftMost?.right != null) {
+                    leftMost = leftMost?.right
+                    break
+                }
+                leftMost = leftMost?.next
+                if (leftMost == null) break
+            }
+            downNode = leftMost
+            while (upNode != null) {
+                if (upNode.left != null && upNode.left != downNode) {
+                    downNode?.next = upNode.left
+                    downNode = downNode?.next
+                    continue
+                }
+                if (upNode.right != downNode) {
+                    downNode?.next = upNode.right
+                    if (downNode?.next != null) {
+                        downNode = downNode.next
+                    }
+                }
+                upNode = upNode.next
             }
         }
         return root
