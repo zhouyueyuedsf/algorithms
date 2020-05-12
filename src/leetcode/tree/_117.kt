@@ -43,6 +43,9 @@ object _117 {
         return root
     }
 
+    /**
+     * 未实现的方法
+     */
     fun connect2(root: Node?): Node? {
         if (root == null) return null
         var leftMost = root
