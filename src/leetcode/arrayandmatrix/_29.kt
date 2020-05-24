@@ -1,6 +1,4 @@
-package leetcode.array
-
-import interview.chapter_9_others.Problem_09_MaxABSBetweenLeftAndRight
+package leetcode.arrayandmatrix
 
 /**
  * @time 2020/5/23

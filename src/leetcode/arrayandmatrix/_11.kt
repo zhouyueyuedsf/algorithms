@@ -1,6 +1,5 @@
-package leetcode.array
+package leetcode.arrayandmatrix
 
-import common.ArrayClass
 import kotlin.math.max
 import kotlin.math.min
 

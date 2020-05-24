@@ -1,4 +1,4 @@
-package leetcode.array;
+package leetcode.arrayandmatrix;
 
 public class _11 {
 

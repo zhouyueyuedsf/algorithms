@@ -1,4 +1,4 @@
-package leetcode.array
+package leetcode.arrayandmatrix
 
 /**
  * 给定一个排序数组和一个目标值，在数组中找到目标值，

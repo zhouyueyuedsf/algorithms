@@ -1,8 +1,7 @@
-package leetcode.array
+package leetcode.arrayandmatrix
 
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.random.Random
 
 
 /**

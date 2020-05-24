@@ -1,4 +1,4 @@
-package leetcode.array
+package leetcode.arrayandmatrix
 
 import java.lang.Integer.min
 import kotlin.math.max

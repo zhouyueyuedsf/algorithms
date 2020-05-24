@@ -1,6 +1,5 @@
 package leetcode.sort
 
-import leetcode.array.merge
 import kotlin.math.max
 import kotlin.math.min
 

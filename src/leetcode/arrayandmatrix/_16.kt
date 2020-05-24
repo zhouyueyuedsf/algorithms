@@ -1,6 +1,6 @@
-package leetcode.array
+package leetcode.arrayandmatrix
 
-import leetcode.array._16.threeSumClosest2
+import leetcode.arrayandmatrix._16.threeSumClosest2
 import kotlin.math.abs
 
 /**
