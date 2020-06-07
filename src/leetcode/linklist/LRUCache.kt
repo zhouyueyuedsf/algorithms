@@ -32,17 +32,21 @@ class LRUCache<T, V>(val capacity: Int) {
         var node = hashMap[key]
         if (node == null) {
             node = Node(key, value)
-            hashMap[key] = node
             val size = linkedList.size
             if (size + 1 > capacity) {
+                // 容量超阈值需要先移除节点
                 val lastNode = linkedList.pollLast()
                 hashMap.remove(lastNode.key)
             }
+            // 添加节点
+            hashMap[key] = node
             linkedList.putFirst(node)
         } else {
+            // 处理已经存在的节点，replace
             node.value = value
             node.key = key
             hashMap[key] = node
+            // 将该节点放到头部
             linkedList.remove(node)
             linkedList.putFirst(node)
         }
