@@ -27,8 +27,7 @@ public class PathSum extends Solution {
 		if (curSum == sum && root.left == null && root.right == null) {
 			lists.add(new LinkedList<>(next));
 			return curSum - next.removeLast();
-		}
-		;
+		};
 
 		int left = helper(root.left, sum, curSum, next);
 
