@@ -39,11 +39,11 @@ public class _206 {
             n2 = head.next;
             head.next = n1;
             n1 = head;
-
             head = n2;
         }
         return n1;
     }
+
     public static void main(String[] args) {
         ListNode node = reverseList3(LinkedListClass.ArrayToList("1,2,3,4,5,6"));
         System.out.println(1);
