@@ -46,6 +46,9 @@ import kotlin.math.pow
  */
 object _73 {
 
+    /**
+     * 该方法有局限，即矩阵长，款均不能大于63
+     */
     fun setZeroes(matrix: Array<IntArray>): Unit {
         val m = matrix.size
         if (m == 0) return
@@ -56,6 +59,7 @@ object _73 {
         for (i in 0 until m) {
             for (j in 0 until n) {
                 if (matrix[i][j] == 0) {
+                    // 使用位去记录位置
                     bitR = bitR or (2.0.pow(i).toLong())
                     bitC = bitC or (2.0.pow(j).toLong())
                 }
@@ -83,6 +87,9 @@ object _73 {
         }
     }
 
+    /**
+     * 找到n的二进制串的第一个1的位置的索引
+     */
     fun indexOfFirstOne(n: Long): Int {
         var _n = n
         var res = 0
@@ -107,11 +114,13 @@ object _73 {
                         matrix[i][j] = flagBoth
                     } else {
                         // 计算是否行刷新，列刷新，都刷新
+                        // 拆分
                         if (matrix[i][0] == flagCol || matrix[i][0] == flagBoth) {
                             matrix[i][0] = flagBoth
                         } else {
                             matrix[i][0] = flagRow
                         }
+                        // 合并
                         if (matrix[0][j] == flagRow || matrix[0][j] == flagBoth) {
                             matrix[0][j] = flagBoth
                         } else {
@@ -123,6 +132,7 @@ object _73 {
         }
 
         for (j in 0 until n) {
+            // 刷新 both标记
             if (matrix[0][j] == flagBoth) {
                 for (i in 0 until m) {
                     if (matrix[i][0] != flagCol && matrix[i][0] != flagRow) {
@@ -148,6 +158,7 @@ object _73 {
         }
 
         for (i in 0 until m) {
+            // 刷新 both标记
             if (matrix[i][0] == flagBoth) {
                 for (k in 0 until m) {
                     if (matrix[i][0] != flagCol && matrix[i][0] != flagRow) {
