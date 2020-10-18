@@ -11,7 +11,7 @@ object _24 {
             var (firstHead, firstFail) = reverse(cur, 2)
 //            firstFail.next = reverse(firstFail.next, 2).first
                     }
-//        return firstHead
+        return cur
     }
 
     /**
@@ -30,8 +30,33 @@ object _24 {
         }
         return Pair(pre, head)
     }
+
+    fun reverse2(head: ListNode?): ListNode? {
+        var pre: ListNode = ListNode(0)
+        var localPre = pre
+        var localHead = head
+        while (localHead?.next != null) {
+            val next = localHead.next
+            localPre.next = next
+            localPre = localHead
+            localHead = next.next
+            next.next = localPre
+        }
+        if (localHead?.next == null) {
+            localPre.next = localHead
+        }
+        return pre.next
+    }
+
+    fun reverse3(head: ListNode?): ListNode? {
+        if (head?.next == null) return head
+        val next = head.next
+        head.next = reverse3(next.next)
+        next.next = head
+        return next
+    }
 }
 
 fun main() {
-    _24.swapPairs(LinkedListClass.ArrayToList("1,2,3,4"))
+    _24.reverse2(LinkedListClass.ArrayToList("1,2,3,4,5"))
 }
